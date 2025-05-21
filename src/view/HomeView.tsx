@@ -1,6 +1,7 @@
 'use client';
 import { useState, ChangeEvent } from 'react';
 import { useRouter } from 'next/navigation';
+import Button from '@/components/Button';
 
 export default function HomeView() {
   const router = useRouter();
@@ -29,12 +30,7 @@ export default function HomeView() {
         value={name}
         onChange={handleInputChange}
       />
-      <button
-        onClick={handleStartQuiz}
-        className="bg-blue-500 py-2 px-3 rounded-md text-white"
-      >
-        Start Quiz
-      </button>
+      <Button btnAction={handleStartQuiz} btnName='Start Quiz'/>
       </div>
       
     </div>
