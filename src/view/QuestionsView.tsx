@@ -138,7 +138,7 @@ export default function QuestionsView() {
           </div>
         </div>
       ) : (
-        <div className="bg-white rounded-lg px-2 flex flex-col  text-black w-5/12 h-5/6  shadow-2xl border-gray-200 border-2">
+        <div className="bg-white rounded-lg px-2 flex flex-col  text-black w-5/12 pb-5 my-5 shadow-2xl border-gray-200 border-2">
           <div
             style={{ width: `${progress}%` }}
             className={`bg-gray-500 mt-1  h-3`}
