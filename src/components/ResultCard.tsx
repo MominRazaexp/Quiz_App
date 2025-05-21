@@ -1,14 +1,8 @@
 import React from 'react'
 import Button from './Button'
+import {ResultInterface} from "../Interface/interface"
 
-type ResultProps = {
-  totalQ: number;
-  corrected: number; 
-  handleReStartQuiz: () => void;
-  handleStartQuiz : () => void;
-};
-
-export default function ResultCard({totalQ , corrected ,handleReStartQuiz ,handleStartQuiz}:ResultProps) {
+export default function ResultCard({ totalQ , corrected ,handleReStartQuiz ,handleStartQuiz }: ResultInterface) {
   return (
     <div className="bg-white rounded-lg px-2 flex flex-col items-center  text-black w-[20%] py-4  shadow-2xl border-gray-200 border-2">
           <h1 className=" text-xl font-bold">Here is Your Score</h1>

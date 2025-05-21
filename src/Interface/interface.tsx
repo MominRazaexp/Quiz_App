@@ -6,3 +6,32 @@ export interface currentQInterface {
   correct_answer: string;
   incorrect_answers: string[];
 }
+
+export interface StarIconInterface {
+    className?: string;
+}
+
+export interface ButtonInterface {
+  btnName: string;
+  btnAction: () => void;
+};
+
+export interface ChoiceInterface  {
+  choices: string[];
+  isAnswerd: boolean;
+  selectedChoice: string;
+  handleAnswer: (value: string) => void;
+};
+
+export interface ProgressInterface {
+  currentScore: number;
+  maxScore: number;
+  minScore: number;
+};
+
+export interface ResultInterface  {
+  totalQ: number;
+  corrected: number; 
+  handleReStartQuiz: () => void;
+  handleStartQuiz : () => void;
+};
