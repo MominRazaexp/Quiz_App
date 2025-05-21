@@ -31,7 +31,7 @@ export default function HomeView() {
       />
       <button
         onClick={handleStartQuiz}
-        className="bg-blue-500 py-2 px-3 rounded text-black border-gray-200 border-2"
+        className="bg-blue-500 py-2 px-3 rounded-md text-white"
       >
         Start Quiz
       </button>

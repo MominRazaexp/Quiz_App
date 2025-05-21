@@ -121,10 +121,10 @@ export default function QuestionsView() {
         <span className="text-lg mt-10">{`You have Corrected ${corrected} out of ${totalQ}`}</span>
         <span className="text-lg mt-3">{`Percentage: ${(corrected/totalQ*100).toFixed(2)}%`}</span>
         <div className="flex justify-around w-[100%] ">
-          <button onClick={handleStartQuiz}  className="mt-10  text-md bg-gray-400 rounded-md px-2 py-1 border-black border-2">
+          <button onClick={handleStartQuiz}  className="mt-10  text-md bg-blue-500 text-white rounded-md px-2 py-1 ">
               Start New Quiz
             </button>
-            <button onClick={handleReStartQuiz}  className="mt-10  text-md bg-gray-400 rounded-md px-2 py-1 border-black border-2">
+            <button onClick={handleReStartQuiz}  className="mt-10  text-md bg-blue-500 text-white rounded-md px-2 py-1 ">
               Restart Quiz
             </button>
 
@@ -179,13 +179,13 @@ export default function QuestionsView() {
           </div>
           {isAnswerd && <h1 className="text-center text-2xl mt-10">{answerFlag}</h1>}
           {isAnswerd && currentQCount === totalQ? <div className="mt-7 flex justify-center ">
-            <button onClick={handleResult} className="  text-xl bg-gray-400 rounded-md px-3 py-2 border-black border-2">
+            <button onClick={handleResult} className="  text-xl bg-blue-500 text-white rounded-md px-3 py-2 ">
               See Result
             </button>
           </div>
           :<>
           {isAnswerd && <div className="mt-7 flex justify-center ">
-            <button onClick={handleNextQ} className="  text-xl bg-gray-400 rounded-md px-3 py-2 border-black border-2">
+            <button onClick={handleNextQ} className="  text-xl bg-blue-500 text-white rounded-md px-3 py-2 ">
               Next Question
             </button>
           </div>}
