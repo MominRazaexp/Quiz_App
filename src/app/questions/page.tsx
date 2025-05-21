@@ -116,15 +116,15 @@ export default function Page() {
   return (
     <div className="flex justify-center items-center w-screen h-screen">
       {
-      isShowingResult?<div className="bg-white rounded px-2 flex flex-col items-center  text-black w-[20%] h-[25%]">
-        <h1 className="text-2xl mt-2">Here is Your Score</h1>
+      isShowingResult?<div className="bg-white rounded-lg px-2 flex flex-col items-center  text-black w-[20%] py-4  shadow-2xl border-gray-200 border-2">
+        <h1 className=" text-xl font-bold">Here is Your Score</h1>
         <span className="text-lg mt-10">{`You have Corrected ${corrected} out of ${totalQ}`}</span>
         <span className="text-lg mt-3">{`Percentage: ${(corrected/totalQ*100).toFixed(2)}%`}</span>
         <div className="flex justify-around w-[100%] ">
-          <button onClick={handleStartQuiz}  className="mt-10  text-lg bg-gray-400 rounded-md px-2 py-1 border-black border-2">
+          <button onClick={handleStartQuiz}  className="mt-10  text-md bg-gray-400 rounded-md px-2 py-1 border-black border-2">
               Start New Quiz
             </button>
-            <button onClick={handleReStartQuiz}  className="mt-10  text-lg bg-gray-400 rounded-md px-2 py-1 border-black border-2">
+            <button onClick={handleReStartQuiz}  className="mt-10  text-md bg-gray-400 rounded-md px-2 py-1 border-black border-2">
               Restart Quiz
             </button>
 
@@ -132,7 +132,7 @@ export default function Page() {
         
       </div>:
 
-      <div className="bg-white rounded px-2 flex flex-col  text-black w-5/12 h-5/6">
+      <div className="bg-white rounded-lg px-2 flex flex-col  text-black w-5/12 h-5/6  shadow-2xl border-gray-200 border-2">
         <div style={{width:`${progress}%`}} className={`bg-gray-500 mt-1  h-3`}></div>
 
         <div className="flex flex-col px-20">
