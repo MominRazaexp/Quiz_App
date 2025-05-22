@@ -24,7 +24,7 @@ export default function Rating({ difficulty }: RatingInterface) {
       className={
         index < filledCount
           ? "w-3 h-3 sm:w-6 sm:h-6 text-black fill-black"
-          : "text-gray-400 fill-gray-400"
+          : "w-3 h-3 sm:w-6 sm:h-6 text-gray-400 fill-gray-400"
       }
     />
   ));
