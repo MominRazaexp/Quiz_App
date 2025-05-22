@@ -1,5 +1,4 @@
 "use client";
-import { StarIcon } from "lucide-react";
 import Button from "@/components/Button";
 import ResultCard from "@/components/ResultCard";
 import Choice from "@/components/Choice";
