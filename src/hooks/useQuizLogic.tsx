@@ -12,11 +12,8 @@ export default function useQuizLogic() {
   const router = useRouter();
   const [choices, setChoices] = useState<string[]>([]);
   const [progress, setProgress] = useState<number>(0);
-  const [currentScore, setCurrentScore] = useState<number>(0);
   const [attempted, setAttempted] = useState<number>(0);
   const [corrected, setCorrected] = useState<number>(0);
-  const [maxScore, setMaxScore] = useState<number>(0);
-  const [minScore, setMinScore] = useState<number>(0);
   const [selectedChoice, setSelectedChoice] = useState<string>("");
   const [answerFlag, setAnswerFlag] = useState<string>("");
   const isAnsweredRef = useRef(false);
@@ -181,7 +178,13 @@ export default function useQuizLogic() {
     setProgress(
       (QuestionProgress.currentQCount / formatedQuestions.length) * 100
     );
-    setMaxScore(100);
+
+    setScoreStats((prev) => {
+      return {
+        ...prev,
+        maxScore: 100,
+      }});
+  
   }, []);
 
   useEffect(() => {

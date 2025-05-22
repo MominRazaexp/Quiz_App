@@ -22,7 +22,7 @@ export default function HomeView() {
   return (
     <div className="flex flex-col justify-center items-center min-h-screen px-4 ">
       <div className="flex flex-col justify-center items-center w-full max-w-md p-6 rounded-lg drop-shadow-lg shadow-2xl border-gray-200 border-2">
-        <h1 className="m-5 sm:text-lg sm:text-xl font-medium">
+        <h1 className="m-5 text-lg sm:text-xl font-medium">
           Welcome to our Quiz App
         </h1>
         <input
@@ -31,11 +31,6 @@ export default function HomeView() {
           placeholder="Enter Your Name"
           value={name}
           onChange={handleInputChange}
-          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-            if (e.key === "Enter") {
-              handleStartQuiz();
-            }
-          }}
         />
         <Button btnAction={handleStartQuiz} btnName="Start Quiz" />
       </div>

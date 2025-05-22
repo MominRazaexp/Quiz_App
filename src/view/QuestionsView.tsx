@@ -3,20 +3,24 @@ import Button from "@/components/Button";
 import ResultCard from "@/components/ResultCard";
 import Choice from "@/components/Choice";
 import ProgressBar from "@/components/ProgressBar";
-import useQuizLogic from "@/hooks/useQuizLogic";
-import Rating from "@/components/Rating";
+import useQuizLogic from "@/customHooks/useQuizLogic";
 
 export default function QuestionsView() {
   const {
+    totalQ,
     currentQ,
     corrected,
-    QuestionProgress,
+    currentQCount,
     choices,
     selectedChoice,
     answerFlag,
-    quizStatus,
-    scoreStats,
+    isAnswerd,
+    isShowingResult,
+    currentScore,
+    maxScore,
+    minScore,
     progress,
+    starRating,
     handleAnswer,
     handleNextQ,
     handleStartQuiz,
@@ -26,9 +30,9 @@ export default function QuestionsView() {
 
   return (
     <div className="flex justify-center items-center w-full min-h-screen sm:px-4">
-      {quizStatus.isShowingResult ? (
+      {isShowingResult ? (
         <ResultCard
-          totalQ={QuestionProgress.totalQ}
+          totalQ={totalQ}
           corrected={corrected}
           handleReStartQuiz={handleReStartQuiz}
           handleStartQuiz={handleStartQuiz}
@@ -41,34 +45,31 @@ export default function QuestionsView() {
           ></div>
 
           <div className="flex flex-col px-4 sm:px-10">
-            <h1 className="text-xl sm:text-2xl md:text-3xl  mt-10">{`Question ${QuestionProgress.currentQCount} of ${QuestionProgress.totalQ}`}</h1>
+            <h1 className="text-xl sm:text-2xl md:text-3xl  mt-10">{`Question ${currentQCount} of ${totalQ}`}</h1>
             <span className=" text-gray-400">{currentQ.category}</span>
-            <div className="flex">
-              <Rating difficulty={currentQ.difficulty} />
-            </div>
+            <div className=" flex">{starRating(currentQ.difficulty)}</div>
             <span className="mt-10 text-base sm:text-xl">
               {currentQ.question}
             </span>
 
             <Choice
               choices={choices}
-              isAnswered={quizStatus.isAnswered}
+              isAnswerd={isAnswerd}
               handleAnswer={handleAnswer}
               selectedChoice={selectedChoice}
             />
-            {quizStatus.isAnswered && (
+            {isAnswerd && (
               <h1 className="text-center text-base sm:text-2xl m-3 sm:mt-10">
                 {answerFlag}
               </h1>
             )}
-            {quizStatus.isAnswered &&
-            QuestionProgress.currentQCount === QuestionProgress.totalQ ? (
-              <div className="sm:mt-7 flex justify-center ">
+            {isAnswerd && currentQCount === totalQ ? (
+              <div className="mt-7 flex justify-center ">
                 <Button btnAction={handleResult} btnName="See Result" />
               </div>
             ) : (
               <>
-                {quizStatus.isAnswered && (
+                {isAnswerd && (
                   <div className="sm:mt-7 flex justify-center ">
                     <Button btnAction={handleNextQ} btnName="Next Question" />
                   </div>
@@ -76,9 +77,9 @@ export default function QuestionsView() {
               </>
             )}
             <ProgressBar
-              currentScore={scoreStats.currentScore}
-              maxScore={scoreStats.maxScore}
-              minScore={scoreStats.minScore}
+              currentScore={currentScore}
+              maxScore={maxScore}
+              minScore={minScore}
             />
           </div>
         </div>
