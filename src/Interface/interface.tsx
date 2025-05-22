@@ -8,30 +8,30 @@ export interface currentQInterface {
 }
 
 export interface StarIconInterface {
-    className?: string;
+  className?: string;
 }
 
 export interface ButtonInterface {
   btnName: string;
   btnAction: () => void;
-};
+}
 
-export interface ChoiceInterface  {
+export interface ChoiceInterface {
   choices: string[];
   isAnswerd: boolean;
   selectedChoice: string;
   handleAnswer: (value: string) => void;
-};
+}
 
 export interface ProgressInterface {
   currentScore: number;
   maxScore: number;
   minScore: number;
-};
+}
 
-export interface ResultInterface  {
+export interface ResultInterface {
   totalQ: number;
-  corrected: number; 
+  corrected: number;
   handleReStartQuiz: () => void;
-  handleStartQuiz : () => void;
-};
+  handleStartQuiz: () => void;
+}

@@ -2,6 +2,7 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import questions from "../data/questions.json";
 import { currentQInterface } from "@/Interface/interface";
+import { StarIcon } from "@/icon";
 
 export default function useQuizLogic() {
   const router = useRouter();
@@ -49,6 +50,22 @@ export default function useQuizLogic() {
     setIsShowingResult(false);
     setProgress((currentQCount / formatedQuestions.length) * 100);
     setMaxScore(100);
+  };
+
+  const starRating = (difficulty: string): JSX.Element[] => {
+    const filledCount =
+      difficulty === "easy" ? 1 : difficulty === "medium" ? 2 : 3;
+
+    return Array.from({ length: 3 }, (_, index) => (
+      <StarIcon
+        key={index}
+        className={
+          index < filledCount
+            ? "text-black fill-black"
+            : "text-gray-400 fill-gray-400"
+        }
+      />
+    ));
   };
 
   const handleAnswer = (choice: string) => {
@@ -123,6 +140,7 @@ export default function useQuizLogic() {
     maxScore,
     minScore,
     progress,
+    starRating,
     handleAnswer,
     handleNextQ,
     handleStartQuiz,

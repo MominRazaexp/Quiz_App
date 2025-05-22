@@ -21,13 +21,13 @@ export default function QuestionsView() {
     maxScore,
     minScore,
     progress,
+    starRating,
     handleAnswer,
     handleNextQ,
     handleStartQuiz,
     handleReStartQuiz,
     handleResult,
   } = useQuizLogic();
-
 
   return (
     <div className="flex justify-center items-center w-full min-h-screen sm:px-4">
@@ -48,25 +48,10 @@ export default function QuestionsView() {
           <div className="flex flex-col px-4 sm:px-10">
             <h1 className="text-xl sm:text-2xl md:text-3xl  mt-10">{`Question ${currentQCount} of ${totalQ}`}</h1>
             <span className=" text-gray-400">{currentQ.category}</span>
-            <div className=" flex">
-              <StarIcon className="w-4 h-4 sm:w-6 sm:h-6 text-black fill-black " />
-              <StarIcon
-                className={`w-4 h-4 sm:w-6 sm:h-6 ${
-                  currentQ.difficulty === "medium" ||
-                  currentQ.difficulty === "hard"
-                    ? "text-black fill-black"
-                    : "text-gray-500 fill-gray-500"
-                }`}
-              />
-              <StarIcon
-                className={`w-4 h-4 sm:w-6 sm:h-6 ${
-                  currentQ.difficulty === "hard"
-                    ? "text-black fill-black"
-                    : "text-gray-500 fill-gray-500"
-                }`}
-              />
-            </div>
-            <span className="mt-10 text-base sm:text-xl">{currentQ.question}</span>
+            <div className=" flex">{starRating(currentQ.difficulty)}</div>
+            <span className="mt-10 text-base sm:text-xl">
+              {currentQ.question}
+            </span>
 
             <Choice
               choices={choices}
@@ -75,7 +60,9 @@ export default function QuestionsView() {
               selectedChoice={selectedChoice}
             />
             {isAnswerd && (
-              <h1 className="text-center text-base sm:text-2xl m-3 sm:mt-10">{answerFlag}</h1>
+              <h1 className="text-center text-base sm:text-2xl m-3 sm:mt-10">
+                {answerFlag}
+              </h1>
             )}
             {isAnswerd && currentQCount === totalQ ? (
               <div className="mt-7 flex justify-center ">

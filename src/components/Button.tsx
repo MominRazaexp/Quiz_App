@@ -1,7 +1,6 @@
 import React from "react";
 import { ButtonInterface } from "@/Interface/interface";
 
-
 export default function Button({ btnName, btnAction }: ButtonInterface) {
   return (
     <button

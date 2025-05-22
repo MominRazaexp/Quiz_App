@@ -1,6 +1,5 @@
 import React from "react";
-import {ChoiceInterface} from "../Interface/interface"
-
+import { ChoiceInterface } from "../Interface/interface";
 
 export default function Choice({
   choices,
