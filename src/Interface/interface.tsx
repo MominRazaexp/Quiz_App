@@ -6,6 +6,21 @@ export interface currentQInterface {
   correct_answer: string;
   incorrect_answers: string[];
 }
+export interface QuizStatusInterface {
+  isAnswered: boolean;
+  isShowingResult: boolean;
+}
+
+export interface QuestionProgressInterface {
+  currentQCount: number;
+  totalQ: number;
+}
+
+export interface ScoreStatsInterface {
+  currentScore: number;
+  maxScore: number;
+  minScore: number;
+}
 
 export interface StarIconInterface {
   className?: string;
@@ -18,7 +33,7 @@ export interface ButtonInterface {
 
 export interface ChoiceInterface {
   choices: string[];
-  isAnswerd: boolean;
+  isAnswered: boolean;
   selectedChoice: string;
   handleAnswer: (value: string) => void;
 }
@@ -34,4 +49,7 @@ export interface ResultInterface {
   corrected: number;
   handleReStartQuiz: () => void;
   handleStartQuiz: () => void;
+}
+export interface RatingInterface {
+  difficulty: string;
 }

@@ -183,8 +183,8 @@ export default function useQuizLogic() {
       return {
         ...prev,
         maxScore: 100,
-      }});
-  
+      };
+    });
   }, []);
 
   useEffect(() => {
