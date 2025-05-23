@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ChoiceInterface } from "../Interface/interface";
-
-function shuffleArray<T>(array: T[]): T[] {
-  return [...array].sort(() => Math.random() - 0.5);
-}
+import { shuffleArray } from "@/utils/utils";
 
 export default function Choice({
   choices,
@@ -14,6 +11,7 @@ export default function Choice({
   const [shuffledChoices, setShuffledChoices] = useState<string[]>(
     shuffleArray(choices)
   );
+
   useEffect(() => {
     setShuffledChoices(shuffleArray(choices));
   }, [choices]);

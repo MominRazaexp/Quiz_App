@@ -1,11 +1,13 @@
 "use client";
-import { useState, ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
+import { useUser } from "@/context/userContext";
 
 export default function HomeView() {
+  
   const router = useRouter();
-  const [name, setName] = useState("");
+  const {name , setName} = useUser();
 
   const handleStartQuiz = (): void => {
     if (name.trim() === "") {

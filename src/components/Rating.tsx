@@ -16,7 +16,7 @@ export default function Rating({ difficulty }: RatingInterface) {
       filledCount = 3;
       break;
     default:
-      filledCount = 0; // fallback, in case difficulty is unknown
+      filledCount = 0;
   }
   return Array.from({ length: 3 }, (_, index) => (
     <StarIcon

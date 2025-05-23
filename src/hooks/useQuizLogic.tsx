@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 import { useRef, useState, useEffect } from "react";
 import questions from "../data/questions.json";
-import { currentQInterface } from "@/Interface/interface";
+import { currentQuestionInterface } from "@/Interface/interface";
 import {
   QuizStatusInterface,
   QuestionProgressInterface,
@@ -22,22 +22,23 @@ export default function useQuizLogic() {
     maxScore: 0,
     minScore: 0,
   });
-  const [QuestionProgress, setQuestionProgress] =
+
+  const [questionProgress, setQuestionProgress] =
     useState<QuestionProgressInterface>({
-      currentQCount: 1,
-      totalQ: 0,
+      currentQuestionCount: 1,
+      totalQuestion: 0,
     });
   const [quizStatus, setQuizStatus] = useState<QuizStatusInterface>({
     isAnswered: false,
     isShowingResult: false,
   });
-  const [currentQ, setCurrentQ] = useState<currentQInterface>({
+  const [currentQuestion, setCurrentQuestion] = useState<currentQuestionInterface>({
     category: "",
     type: "",
     difficulty: "",
     question: "",
-    correct_answer: "",
-    incorrect_answers: [],
+    correctAnswer: "",
+    incorrectAnswers: [],
   });
 
   const decodeText = (text: string) => {
@@ -57,7 +58,7 @@ export default function useQuizLogic() {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Enter" && isAnsweredRef.current) {
-        if (QuestionProgress.currentQCount === QuestionProgress.totalQ) {
+        if (questionProgress.currentQuestionCount === questionProgress.totalQuestion) {
           handleResult();
         } else {
           handleNextQ();
@@ -70,7 +71,7 @@ export default function useQuizLogic() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [QuestionProgress.currentQCount, QuestionProgress.totalQ]);
+  }, [questionProgress.currentQuestionCount, questionProgress.totalQuestion]);
 
   useEffect(() => {
     isAnsweredRef.current = quizStatus.isAnswered;
@@ -83,7 +84,7 @@ export default function useQuizLogic() {
     setQuestionProgress((prev) => {
       return {
         ...prev,
-        currentQCount: 1,
+        currentQuestionCount: 1,
       };
     });
     setScoreStats(() => {
@@ -99,25 +100,25 @@ export default function useQuizLogic() {
       return { ...prev, isShowingResult: false };
     });
     setProgress(
-      (QuestionProgress.currentQCount / formatedQuestions.length) * 100
+      (questionProgress.currentQuestionCount / formatedQuestions.length) * 100
     );
   };
 
   const handleAnswer = (choice: string) => {
     setSelectedChoice(choice);
-    if (currentQ.correct_answer === choice) {
+    if (currentQuestion.correctAnswer === choice) {
       setCorrected(corrected + 1);
       setAnswerFlag("Correct!");
       setScoreStats(() => {
         return {
           currentScore: Math.floor(((corrected + 1) / (attempted + 1)) * 100),
           maxScore: Math.floor(
-            ((corrected + 1 + (QuestionProgress.totalQ - (attempted + 1))) /
-              QuestionProgress.totalQ) *
+            ((corrected + 1 + (questionProgress.totalQuestion - (attempted + 1))) /
+              questionProgress.totalQuestion) *
               100
           ),
           minScore: Math.floor(
-            ((corrected + 1) / QuestionProgress.totalQ) * 100
+            ((corrected + 1) / questionProgress.totalQuestion) * 100
           ),
         };
       });
@@ -127,11 +128,11 @@ export default function useQuizLogic() {
         return {
           currentScore: Math.floor((corrected / (attempted + 1)) * 100),
           maxScore: Math.floor(
-            ((corrected + (QuestionProgress.totalQ - (attempted + 1))) /
-              QuestionProgress.totalQ) *
+            ((corrected + (questionProgress.totalQuestion - (attempted + 1))) /
+              questionProgress.totalQuestion) *
               100
           ),
-          minScore: Math.floor((corrected / QuestionProgress.totalQ) * 100),
+          minScore: Math.floor((corrected / questionProgress.totalQuestion) * 100),
         };
       });
     }
@@ -147,14 +148,14 @@ export default function useQuizLogic() {
       ...q,
       category: decodeText(q.category),
       question: decodeText(q.question),
-      correct_answer: decodeText(q.correct_answer),
-      incorrect_answers: q.incorrect_answers.map(decodeText),
+      correctAnswer: decodeText(q.correct_answer),
+      incorrectAnswers: q.incorrect_answers.map(decodeText),
     };
   });
 
   const handleNextQ = () => {
     setProgress(
-      ((QuestionProgress.currentQCount + 1) / QuestionProgress.totalQ) * 100
+      ((questionProgress.currentQuestionCount + 1) / questionProgress.totalQuestion) * 100
     );
     setQuizStatus((prev) => {
       return { ...prev, isAnswered: false };
@@ -163,7 +164,7 @@ export default function useQuizLogic() {
     setQuestionProgress((prev) => {
       return {
         ...prev,
-        currentQCount: prev.currentQCount + 1,
+        currentQuestionCount: prev.currentQuestionCount + 1,
       };
     });
   };
@@ -172,11 +173,11 @@ export default function useQuizLogic() {
     setQuestionProgress((prev) => {
       return {
         ...prev,
-        totalQ: formatedQuestions.length,
+        totalQuestion: formatedQuestions.length,
       };
     });
     setProgress(
-      (QuestionProgress.currentQCount / formatedQuestions.length) * 100
+      (questionProgress.currentQuestionCount / formatedQuestions.length) * 100
     );
 
     setScoreStats((prev) => {
@@ -188,28 +189,28 @@ export default function useQuizLogic() {
   }, []);
 
   useEffect(() => {
-    setCurrentQ(formatedQuestions[QuestionProgress.currentQCount - 1]);
+    setCurrentQuestion(formatedQuestions[questionProgress.currentQuestionCount - 1]);
     const incChoices: string[] = [
-      ...formatedQuestions[QuestionProgress.currentQCount - 1]
-        .incorrect_answers,
+      ...formatedQuestions[questionProgress.currentQuestionCount - 1]
+        .incorrectAnswers,
     ];
     incChoices.push(
-      formatedQuestions[QuestionProgress.currentQCount - 1].correct_answer
+      formatedQuestions[questionProgress.currentQuestionCount - 1].correctAnswer
     );
     const choices: string[] = incChoices;
     setChoices(choices);
-  }, [QuestionProgress.currentQCount]);
+  }, [questionProgress.currentQuestionCount]);
 
   return {
     corrected,
-    currentQ,
+    currentQuestion,
     choices,
     selectedChoice,
     answerFlag,
     scoreStats,
     progress,
     quizStatus,
-    QuestionProgress,
+    questionProgress,
     handleAnswer,
     handleNextQ,
     handleStartQuiz,
